@@ -2,6 +2,7 @@
 
 ## 🔍 Project Overview
 This project demonstrates a complete time series forecasting workflow using daily coffee sales data. It includes:
+
 - Exploratory Data Analysis (EDA)
 - Time series decomposition and seasonality detection
 - Forecasting with ARIMA, SARIMAX, and Auto ARIMA
@@ -92,9 +93,9 @@ The goal is to identify the best model for capturing weekly seasonality and prod
 
 | Model                        | MAE   | RMSE  |
 |-----------------------------|-------|-------|
-| ARIMA(5,0,5)                | 4.88  | Nan  |
-| SARIMAX(5,0,5)(1,1,2,7)     | 3.50  | Nan  |
-| Auto ARIMA(0,1,1)(1,0,1)[7] | 4.29  | 4.70  |
+| ARIMA(5,0,5)                | 4.88  | nan  |
+| SARIMAX(5,0,5)(1,1,2,7)     | 3.50  | nan  |
+| Auto ARIMA(0,1,1)(1,0,1)[7] | 3.88  | 4.7  |
 
 - Forecasts visualized using Plotly line charts
 - MAE comparison shown via interactive bar chart
@@ -119,3 +120,9 @@ The goal is to identify the best model for capturing weekly seasonality and prod
 - Interactive dashboards improve client and learner engagement
 
 ---
+
+## 🚀 Next Steps
+- Add confidence intervals to forecast plots
+- Package forecasting logic into reusable functions
+- Publish annotated notebook for mentoring and Fiverr gigs
+- Extend to multivariate SARIMAX with external regressors (e.g., weather, promotions)
