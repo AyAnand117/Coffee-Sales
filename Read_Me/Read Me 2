@@ -1,0 +1,121 @@
+# ☕ Coffee Sales Forecasting with SARIMAX, ARIMA, and Auto ARIMA
+
+## 🔍 Project Overview
+This project demonstrates a complete time series forecasting workflow using daily coffee sales data. It includes:
+- Exploratory Data Analysis (EDA)
+- Time series decomposition and seasonality detection
+- Forecasting with ARIMA, SARIMAX, and Auto ARIMA
+- Performance comparison using MAE and RMSE
+- Interactive visualizations using Plotly and Seaborn
+
+The goal is to identify the best model for capturing weekly seasonality and producing accurate forecasts for operational planning, inventory, and staffing.
+
+---
+
+## 📊 Dataset Summary
+- **Source**: Daily transactional coffee sales
+- **Key Columns**: `date`, `datetime`, `coffee_name`, `cash_type`, `card`, `money`
+- **Target Variable**: `cups` — daily count of coffee cups sold
+- **Time Range**: Continuous daily data with gaps filled using a complete date range
+
+---
+
+## 📈 Exploratory Data Analysis (EDA)
+
+### ✅ Data Cleaning
+- Nulls in `card` replaced with `"Unavailable"` for cash transactions
+- No duplicate rows
+- Converted `date` and `datetime` to proper datetime formats
+- Extracted time features: `month`, `day`, `weekdayname`, `hour`
+
+### ✅ Categorical Distributions
+- **Cash Type**: Bar chart showing % split between cash/card
+- **Coffee Name**: Distribution of coffee types sold
+
+### ✅ Revenue Analysis
+- Aggregated total revenue by `coffee_name`
+- Horizontal bar chart with ₹ labels
+
+### ✅ Monthly & Weekday Sales Heatmaps
+- Monthly coffee sales pivoted into heatmaps
+- Interactive Plotly heatmap with hover breakdown by coffee type
+- Weekday sales across months and coffee types
+
+### ✅ Daily Sales Trend
+- Created complete date range and filled missing days with zero sales
+- Visualized daily sales using Plotly line chart with hover tooltips
+
+---
+
+## 🔍 Time Series Analysis
+
+### ✅ Decomposition
+- Used `seasonal_decompose()` with `period=7` to extract:
+  - **Trend**
+  - **Weekly seasonal pattern**
+  - **Residuals**
+- Visualized all components using Plotly subplots
+
+### ✅ Stationarity Check
+- Applied **ADF test** to check for stationarity
+- Result: Data is **stationary**, no differencing needed (`d=0`)
+
+### ✅ ACF & PACF Analysis
+- Used to estimate AR (`p`) and MA (`q`) terms
+- Confirmed weekly seasonality with spikes at lag 7, 14, 21
+
+---
+
+## 🧠 Modeling Approaches
+
+### 1. **ARIMA(5,0,5)**
+- No seasonal terms
+- MAE: **4.88**
+- RMSE: ~**5.1**
+- Interpretation: Baseline model, unable to capture weekly seasonality
+
+### 2. **SARIMAX(5,0,5)(1,1,2,7)**
+- Weekly seasonality (`s=7`) with seasonal differencing (`D=1`)
+- MAE: **3.50**
+- RMSE: **4.03**
+- Interpretation: Manually tuned seasonal model with significant accuracy improvement
+
+### 3. **Auto ARIMA(0,1,1)(1,0,1)[7]**
+- Automatically selected via AIC/BIC minimization
+- MAE: **3.88**
+- RMSE: **4.17**
+- Interpretation: Compact model with competitive performance, ideal for automation
+
+---
+
+## 📊 Forecast Evaluation
+
+| Model                        | MAE   | RMSE  |
+|-----------------------------|-------|-------|
+| ARIMA(5,0,5)                | 4.88  | Nan  |
+| SARIMAX(5,0,5)(1,1,2,7)     | 3.50  | Nan  |
+| Auto ARIMA(0,1,1)(1,0,1)[7] | 4.29  | 4.70  |
+
+- Forecasts visualized using Plotly line charts
+- MAE comparison shown via interactive bar chart
+
+---
+
+## 📦 Tools & Libraries
+- `pandas`, `numpy`, `matplotlib`, `seaborn`, `plotly`
+- `statsmodels` for ARIMA/SARIMAX
+- `pmdarima` for Auto ARIMA
+- `sklearn.metrics` for MAE/RMSE
+- `termcolor` for CLI feedback
+
+---
+
+## 💡 Key Learnings
+- Weekly seasonality (`s=7`) is real and impactful
+- SARIMAX with seasonal terms significantly improves accuracy
+- Auto ARIMA offers a compact, automated alternative
+- ACF/PACF plots are essential for parameter selection
+- Visual storytelling enhances model interpretability
+- Interactive dashboards improve client and learner engagement
+
+---
