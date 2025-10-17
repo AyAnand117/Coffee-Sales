@@ -72,19 +72,19 @@ The goal is to identify the best model for capturing weekly seasonality and prod
 ### 1. **ARIMA(5,0,5)**
 - No seasonal terms
 - MAE: **4.88**
-- RMSE: ~**5.1**
+- RMSE: ~**nan**
 - Interpretation: Baseline model, unable to capture weekly seasonality
 
 ### 2. **SARIMAX(5,0,5)(1,1,2,7)**
 - Weekly seasonality (`s=7`) with seasonal differencing (`D=1`)
 - MAE: **3.50**
-- RMSE: **4.03**
+- RMSE: **nan**
 - Interpretation: Manually tuned seasonal model with significant accuracy improvement
 
 ### 3. **Auto ARIMA(0,1,1)(1,0,1)[7]**
 - Automatically selected via AIC/BIC minimization
-- MAE: **3.88**
-- RMSE: **4.17**
+- MAE: **4.29**
+- RMSE: **4.70**
 - Interpretation: Compact model with competitive performance, ideal for automation
 
 ---
@@ -95,7 +95,7 @@ The goal is to identify the best model for capturing weekly seasonality and prod
 |-----------------------------|-------|-------|
 | ARIMA(5,0,5)                | 4.88  | nan  |
 | SARIMAX(5,0,5)(1,1,2,7)     | 3.50  | nan  |
-| Auto ARIMA(0,1,1)(1,0,1)[7] | 3.88  | 4.7  |
+| Auto ARIMA(0,1,1)(1,0,1)[7] | 4.29  | 4.7  |
 
 - Forecasts visualized using Plotly line charts
 - MAE comparison shown via interactive bar chart
